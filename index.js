@@ -14,10 +14,6 @@ import applicationRoute from "./routes/application.route.js";
 dotenv.config({});
 const app = express();
 
-
-
-// console.log("SECRET KEY:", process.env.SECRET_KEY);
-
 app.get("/home", (req, res) => {
   return res.status(200).json({
     message: "I am coming from backend",
@@ -25,13 +21,7 @@ app.get("/home", (req, res) => {
   });
 });
 
-//  middleware
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-
-
+// ✅ corsOptions first
 const corsOptions = {
   origin: [
     "http://localhost:5173",
@@ -40,7 +30,11 @@ const corsOptions = {
   credentials: true,
 };
 
+// ✅ middleware
 app.use(cors(corsOptions));
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 3000;
 
