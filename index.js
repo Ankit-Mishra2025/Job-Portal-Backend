@@ -26,9 +26,11 @@ app.get("/home", (req, res) => {
 });
 
 //  middleware
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 
 const corsOptions = {
   origin: [
